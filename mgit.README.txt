@@ -71,5 +71,5 @@ Wolfgang Windsteiger (RISC, JKU Linz)
 
 UPDATES
 
-will be available via the Theorema project.
+will be available via the Theorema project or via https://github.com/sn-amber/mgit.
 
