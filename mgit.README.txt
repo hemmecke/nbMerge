@@ -1,0 +1,57 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   mgit - git enabled for Mathematica (R)
+#   Stefan Amberger, amberger.stefan@gmail.com
+#
+#   Copyright (2013) Stefan Amberger. This software is distributed under
+#   the GNUv3 General Public License.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+INSTALLATION
+
+- make sure you have some version of python installed
+  (check with 'which python')
+- place a copy of mgit in the source folder of your Mathematica (R) git
+  working copy
+- cd into the project directory
+- run ./install-mgit.sh
+
+DESCRIPTION
+
+After the installation of mgit all commits executed via the command line will
+trigger a 'git pre-commit hook' that rewrites all modified or created
+Mathematica (R) notebook files, such that they are in a kind of normal form.
+
+For these files the line-based style of git is functional, and merge-conflicts
+will arise when different changes within one formula (Cell) are conflicting.
+
+Merge conflicts that are arising due to different changes within the same cell
+can be easily solved using a provided merge-tool (name: mgit).
+
+USAGE
+
+1. notebook normalization
+-------------------------
+
+this is done automatically once mgit is installed
+
+2. git merge conflict resolution
+--------------------------------
+
+- cd in the root folder of the project-directory
+- check whether the merge conflict is resolvable using classical merge tools
+  (i.e. the conflict arose due to notebook-properties and not changes inside
+  a Cell)
+- if this is not the case, run the command
+  mgit/mgit path/to/conflict/file.nb
+- choose the branch of your choice (by push of a button) for each conflict
+  that appears in the notebook file.
+
+AUTHORS
+
+Stefan Amberger (JKU Linz)
+Wolfgang Windsteiger (RISC, JKU Linz)
+
+UPDATES
+
+will be available via the Theorema project.
+
