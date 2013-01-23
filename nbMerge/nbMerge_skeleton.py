@@ -1,25 +1,25 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#   mgit - git enabled for Mathematica (R)
+#   nbMerge - git enabled for Mathematica (R)
 #   Stefan Amberger, amberger.stefan@gmail.com
 #
 #   Copyright (2013) Stefan Amberger. This software is distributed under
-#   the GNUv3 General Public License.
+#   the GNU General Public License.
 #
-#   This file is part of mgit.
+#   This file is part of nbMerge.
 #
-#   mgit is free software: you can redistribute it and/or modify
+#   nbMerge is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   mgit is distributed in the hope that it will be useful,
+#   nbMerge is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with mgit.  If not, see <http://www.gnu.org/licenses/>.
+#   along with nbMerge.  If not, see <http://www.gnu.org/licenses/>.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 import sys
@@ -121,11 +121,11 @@ def buildMergeNB(data):
 		# add buttons and merge conflicts
 		mergeNB.append(neitherButton(i,branchA,branchB)+', ')
 		cell = data[partAstart:partAend].strip()
-		cell = addCellTag(cell,'mgit::'+branchA+' conflict '+str(i))
+		cell = addCellTag(cell,'nbMerge::'+branchA+' conflict '+str(i))
 		mergeNB.append(cell)
 		mergeNB.append(chooseAButton(i,branchA,branchB)+', ')
 		cell = data[partBstart:partBend].strip()
-		cell = addCellTag(cell,'mgit::'+branchB+' conflict '+str(i))
+		cell = addCellTag(cell,'nbMerge::'+branchB+' conflict '+str(i))
 		mergeNB.append(cell)
 		mergeNB.append(chooseBButton(i,branchA,branchB)+', ')
 
@@ -143,13 +143,13 @@ def buildMergeNB(data):
 
 
 def neitherButton(i,branchA,branchB):
-	return 'Cell[BoxData[ButtonBox["\<\\"Choose neither\\"\>", Appearance -> Automatic, ButtonFunction :> (NotebookFind[SelectedNotebook[], "mgit::'+branchA+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "mgit::'+branchB+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "mgit::button'+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]), Evaluator -> Automatic, Method -> "Preemptive", BaseStyle->{Smaller, FontFamily -> "Helvetica"}]], "Output", CellTags -> "mgit::button'+str(i)+'", ShowCellTags -> False, Background->RGBColor[1, 0.6, 0.6]]'
+	return 'Cell[BoxData[ButtonBox["\<\\"Choose neither\\"\>", Appearance -> Automatic, ButtonFunction :> (NotebookFind[SelectedNotebook[], "nbMerge::'+branchA+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "nbMerge::'+branchB+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "nbMerge::button'+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]), Evaluator -> Automatic, Method -> "Preemptive", BaseStyle->{Smaller, FontFamily -> "Helvetica"}]], "Output", CellTags -> "nbMerge::button'+str(i)+'", ShowCellTags -> False, Background->RGBColor[1, 0.6, 0.6]]'
 
 def chooseAButton(i,branchA,branchB):
-	return 'Cell[BoxData[ButtonBox["\<\\"Choose '+branchA+'\\"\>", Appearance -> Automatic, ButtonFunction :> (NotebookFind[SelectedNotebook[], "mgit::'+branchB+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "mgit::button'+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; SetOptions[ NotebookFind[ SelectedNotebook[], "mgit::'+branchA+' conflict '+str(i)+'", All, CellTags], CellTags -> Select[ Flatten[{ReplaceAll[CellTags, Options[ NotebookRead[ SelectedNotebook[]], CellTags]]}], # != "mgit::'+branchA+' conflict '+str(i)+'"& ]]), Evaluator -> Automatic, Method -> "Preemptive", BaseStyle->{Smaller, FontFamily -> "Helvetica"}]], "Output", CellTags -> "mgit::button'+str(i)+'", ShowCellTags -> False, Background->RGBColor[0.6, 0.8, 1]]'
+	return 'Cell[BoxData[ButtonBox["\<\\"Choose '+branchA+'\\"\>", Appearance -> Automatic, ButtonFunction :> (NotebookFind[SelectedNotebook[], "nbMerge::'+branchB+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "nbMerge::button'+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; SetOptions[ NotebookFind[ SelectedNotebook[], "nbMerge::'+branchA+' conflict '+str(i)+'", All, CellTags], CellTags -> Select[ Flatten[{ReplaceAll[CellTags, Options[ NotebookRead[ SelectedNotebook[]], CellTags]]}], # != "nbMerge::'+branchA+' conflict '+str(i)+'"& ]]), Evaluator -> Automatic, Method -> "Preemptive", BaseStyle->{Smaller, FontFamily -> "Helvetica"}]], "Output", CellTags -> "nbMerge::button'+str(i)+'", ShowCellTags -> False, Background->RGBColor[0.6, 0.8, 1]]'
 
 def chooseBButton(i,branchA,branchB):
-	return 'Cell[BoxData[ButtonBox["\<\\"Choose '+branchB+'\\"\>", Appearance -> Automatic, ButtonFunction :> (NotebookFind[SelectedNotebook[], "mgit::'+branchA+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "mgit::button'+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; SetOptions[ NotebookFind[ SelectedNotebook[], "mgit::'+branchB+' conflict '+str(i)+'", All, CellTags], CellTags -> Select[ Flatten[{ReplaceAll[CellTags, Options[ NotebookRead[ SelectedNotebook[]], CellTags]]}], # != "mgit::'+branchB+' conflict '+str(i)+'"& ]]), Evaluator -> Automatic, Method -> "Preemptive", BaseStyle->{Smaller, FontFamily -> "Helvetica"}]], "Output", CellTags -> "mgit::button'+str(i)+'", ShowCellTags -> False, Background->RGBColor[0.6, 0.8, 1]]'
+	return 'Cell[BoxData[ButtonBox["\<\\"Choose '+branchB+'\\"\>", Appearance -> Automatic, ButtonFunction :> (NotebookFind[SelectedNotebook[], "nbMerge::'+branchA+' conflict '+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; NotebookFind[SelectedNotebook[], "nbMerge::button'+str(i)+'", All, CellTags]; NotebookDelete[SelectedNotebook[]]; SetOptions[ NotebookFind[ SelectedNotebook[], "nbMerge::'+branchB+' conflict '+str(i)+'", All, CellTags], CellTags -> Select[ Flatten[{ReplaceAll[CellTags, Options[ NotebookRead[ SelectedNotebook[]], CellTags]]}], # != "nbMerge::'+branchB+' conflict '+str(i)+'"& ]]), Evaluator -> Automatic, Method -> "Preemptive", BaseStyle->{Smaller, FontFamily -> "Helvetica"}]], "Output", CellTags -> "nbMerge::button'+str(i)+'", ShowCellTags -> False, Background->RGBColor[0.6, 0.8, 1]]'
 
 def addCellTag(cell,tag):
 
@@ -233,4 +233,4 @@ if __name__ == "__main__" and len(sys.argv) == 2:
 		sys.exit(0)
 
 
-# NotebookFind[SelectedNotebook[], "mgit::button'+str(i)+'", All, CellTags];
+# NotebookFind[SelectedNotebook[], "nbMerge::button'+str(i)+'", All, CellTags];

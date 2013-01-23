@@ -1,38 +1,38 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#   mgit - git enabled for Mathematica (R)
+#   nbMerge - git enabled for Mathematica (R)
 #   Stefan Amberger, amberger.stefan@gmail.com
 #
 #   Copyright (2013) Stefan Amberger. This software is distributed under
-#   the GNUv3 General Public License.
+#   the GNU General Public License.
 #
-#   This file is part of mgit.
+#   This file is part of nbMerge.
 #
-#   mgit is free software: you can redistribute it and/or modify
+#   nbMerge is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   mgit is distributed in the hope that it will be useful,
+#   nbMerge is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with mgit.  If not, see <http://www.gnu.org/licenses/>.
+#   along with nbMerge.  If not, see <http://www.gnu.org/licenses/>.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 INSTALLATION
 
 - make sure you have some version of python installed
   (check with 'which python')
-- place a copy of mgit in the source folder of your Mathematica (R) git
+- place a copy of nbMerge in the source folder of your Mathematica (R) git
   working copy
 - cd into the project directory
-- run ./install-mgit.sh
+- run ./install.sh
 
 DESCRIPTION
 
-After the installation of mgit all commits executed via the command line will
+After the installation of nbMerge all commits executed via the command line will
 trigger a 'git pre-commit hook' that rewrites all modified or created
 Mathematica (R) notebook files, such that they are in a kind of normal form.
 
@@ -40,14 +40,14 @@ For these files the line-based style of git is functional, and merge-conflicts
 will arise when different changes within one formula (Cell) are conflicting.
 
 Merge conflicts that are arising due to different changes within the same cell
-can be easily solved using a provided merge-tool (name: mgit).
+can be easily solved using a provided merge-tool (name: nbMerge).
 
 USAGE
 
 1. notebook normalization
 -------------------------
 
-this is done automatically once mgit is installed
+this is done automatically once nbMerge is installed
 
 2. git merge conflict resolution
 --------------------------------
@@ -57,7 +57,7 @@ this is done automatically once mgit is installed
   (i.e. the conflict arose due to notebook-properties and not changes inside
   a Cell)
 - if this is not the case, run the command
-  mgit/mgit path/to/conflict/file.nb
+  nbMerge/nbMerge path/to/conflict/file.nb
 - choose the branch of your choice (by push of a button) for each conflict
   that appears in the notebook file.
 
@@ -71,5 +71,5 @@ Wolfgang Windsteiger (RISC, JKU Linz)
 
 UPDATES
 
-will be available via the Theorema project or via https://github.com/sn-amber/mgit.
+will be available via the Theorema project or via https://github.com/sn-amber/nbMerge.
 

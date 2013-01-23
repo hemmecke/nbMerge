@@ -1,26 +1,26 @@
 #!/bin/bash
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#   mgit - git enabled for Mathematica (R)
+#   nbMerge - git enabled for Mathematica (R)
 #   Stefan Amberger, amberger.stefan@gmail.com
 #
 #   Copyright (2013) Stefan Amberger. This software is distributed under
-#   the GNUv3 General Public License.
+#   the GNU General Public License.
 #
-#   This file is part of mgit.
+#   This file is part of nbMerge.
 #
-#   mgit is free software: you can redistribute it and/or modify
+#   nbMerge is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   mgit is distributed in the hope that it will be useful,
+#   nbMerge is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with mgit.  If not, see <http://www.gnu.org/licenses/>.
+#   along with nbMerge.  If not, see <http://www.gnu.org/licenses/>.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # redirect error stream to /dev/null for next command
@@ -34,14 +34,14 @@ exec 2>&1
 # check if in git repo
 if [[ "$TOPDIR" == "" ]]; then
 	echo "Error: You don't seem to be in a git repository."
-	echo "mgit can only be installed in a git repository."
+	echo "nbMerge can only be installed in a git repository."
 	exit 1
 fi
 
-# check if necessary mgit files are present
-if [ ! -f "$TOPDIR"/mgit/normalize.py ];
+# check if necessary nbMerge files are present
+if [ ! -f "$TOPDIR"/nbMerge/normalize.py ];
 then
-    echo "Error: mgit files not found!"
+    echo "Error: nbMerge files not found!"
     echo "Aborting ..."
     exit 2
 fi
@@ -60,8 +60,8 @@ echo "$FILES"
 
 for FILE in $FILES; do
 	# do not add a '$' here!! this is not a variable, but a substitution-pattern
-	# later recognized by a sed command (see mgit-install.sh)
-	python $TOPDIR/mgit/normalize.py $FILE
+	# later recognized by a sed command (see nbMerge-install.sh)
+	python $TOPDIR/nbMerge/normalize.py $FILE
 
 	if [[ $? -ne 0 ]]; then
 		echo "error while processing file $FILE"
