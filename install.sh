@@ -70,7 +70,7 @@ fi
 
 echo "customizing nbMerge_skeleton.py ..."
 touch "$TOPDIR"/nbMerge/nbMerge
-echo '#!'$(which python) > "$TOPDIR"/nbMerge/nbMerge
+# echo '#!'$(which python) > "$TOPDIR"/nbMerge/nbMerge
 cat "$TOPDIR"/nbMerge/nbMerge_skeleton.py >> "$TOPDIR"/nbMerge/nbMerge
 chmod +x "$TOPDIR"/nbMerge/nbMerge
 

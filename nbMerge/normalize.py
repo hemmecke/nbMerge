@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #   nbMerge - git enabled for Mathematica (R)
 #   Stefan Amberger, amberger.stefan@gmail.com
