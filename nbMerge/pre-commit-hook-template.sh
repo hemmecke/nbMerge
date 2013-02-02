@@ -61,7 +61,7 @@ echo "$FILES"
 for FILE in $FILES; do
 	# do not add a '$' here!! this is not a variable, but a substitution-pattern
 	# later recognized by a sed command (see nbMerge-install.sh)
-	python $TOPDIR/nbMerge/normalize.py $FILE
+	$TOPDIR/nbMerge/normalize.py $FILE
 
 	if [[ $? -ne 0 ]]; then
 		echo "error while processing file $FILE"
