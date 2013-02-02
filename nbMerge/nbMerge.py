@@ -128,7 +128,7 @@ def buildMergeNB(data):
 		cell = data[partBstart:partBend].strip()
 		cell = addCellTag(cell,'nbMerge::'+branchB+' conflict '+str(i))
 		mergeNB.append(cell+',')
-		mergeNB.append(chooseBButton(i,branchA,branchB)+', ')
+		mergeNB.append(chooseBButton(i,branchA,branchB))
 
 		# add stuff inbetween conflicts
 		if i<nconflicts-1:
@@ -219,7 +219,7 @@ if __name__ == "__main__" and len(sys.argv) == 2:
 		if mergeNB == 1 or mergeNB == 2 or mergeNB == 3:
 			sys.exit(0)
 
-		mergefilename = filename.split('.')[0]+".merge.nb"
+		mergefilename = filename
 		out = open(mergefilename,'w')
 		out.write(mergeNB)
 		out.close()
