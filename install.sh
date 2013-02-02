@@ -42,6 +42,12 @@ fi
 REPODIR="$1"
 NBMERGEDIR="$2"
 
+# check if python is available
+if [[ ! -f "/usr/bin/python" ]]; then
+	echo "nbMerge needs to find python at \"/usr/bin/python\"."
+	exit 1
+fi
+
 # sanity check (params need to be directories)
 if [[ ! -d "$REPODIR" ]]; then
 	echo "Error: $REPODIR does not seem to be a directory."

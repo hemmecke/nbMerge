@@ -23,8 +23,6 @@
 
 INSTALLATION
 
-- make sure you have some version of python installed
-  (check with 'which python')
 - place a copy of nbMerge somewhere
 - to install notebook-normalization for a project, run
   ./install.sh [path-to-repo] [path-to-nbMerge]
@@ -41,12 +39,19 @@ will arise when different changes within one formula (Cell) are conflicting.
 Merge conflicts that are arising due to different changes within the same cell
 can be easily solved using a provided merge-tool (name: nbMerge).
 
+IMPORTANT
+
+nbMerge needs to be installed for each repository for which it is supposed normalize
+Mathematica (R) notebook files!
+Merging works, once nbMerge has been installed at least once.
+
 USAGE
 
 1. notebook normalization
 -------------------------
 
 this is done automatically before each commit, once nbMerge is installed
+for a repository
 
 2. git merge conflict resolution
 --------------------------------
