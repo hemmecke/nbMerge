@@ -123,11 +123,11 @@ def buildMergeNB(data):
 		mergeNB.append(neitherButton(i,branchA,branchB)+', ')
 		cell = data[partAstart:partAend].strip()
 		cell = addCellTag(cell,'nbMerge::'+branchA+' conflict '+str(i))
-		mergeNB.append(cell)
+		mergeNB.append(cell+',')
 		mergeNB.append(chooseAButton(i,branchA,branchB)+', ')
 		cell = data[partBstart:partBend].strip()
 		cell = addCellTag(cell,'nbMerge::'+branchB+' conflict '+str(i))
-		mergeNB.append(cell)
+		mergeNB.append(cell+',')
 		mergeNB.append(chooseBButton(i,branchA,branchB)+', ')
 
 		# add stuff inbetween conflicts
