@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #   nbMerge - git enabled for Mathematica (R)
-#   Stefan Amberger, amberger.stefan@gmail.com
+#   Stefan Amberger, snambergit@gmail.com
 #
 #   Copyright (2013) Stefan Amberger. This software is distributed under
 #   the GNU General Public License.
