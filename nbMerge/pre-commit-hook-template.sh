@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #   nbMerge - git enabled for Mathematica (R)
@@ -39,7 +38,7 @@ if [[ "$TOPDIR" == "" ]]; then
 fi
 
 # check if necessary nbMerge files are present
-if [ ! -f "$TOPDIR"/nbMerge/normalize.py ];
+if [ ! -f "$NBMERGEDIR"/nbMerge/normalize.py ];
 then
     echo "Error: nbMerge files not found!"
     echo "Aborting ..."
@@ -61,7 +60,7 @@ echo "$FILES"
 for FILE in $FILES; do
 	# do not add a '$' here!! this is not a variable, but a substitution-pattern
 	# later recognized by a sed command (see nbMerge-install.sh)
-	$TOPDIR/nbMerge/normalize.py $FILE
+	$NBMERGEDIR/nbMerge/normalize.py $FILE
 
 	if [[ $? -ne 0 ]]; then
 		echo "error while processing file $FILE"
