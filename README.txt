@@ -25,10 +25,9 @@ INSTALLATION
 
 - make sure you have some version of python installed
   (check with 'which python')
-- place a copy of nbMerge in the source folder of your Mathematica (R) git
-  working copy
-- cd into the project directory
-- run ./install.sh
+- place a copy of nbMerge somewhere
+- to install notebook-normalization for a project, run
+  ./install.sh [path-to-repo] [path-to-nbMerge]
 
 DESCRIPTION
 
@@ -47,7 +46,7 @@ USAGE
 1. notebook normalization
 -------------------------
 
-this is done automatically once nbMerge is installed
+this is done automatically before each commit, once nbMerge is installed
 
 2. git merge conflict resolution
 --------------------------------
@@ -57,7 +56,7 @@ this is done automatically once nbMerge is installed
   (i.e. the conflict arose due to notebook-properties and not changes inside
   a Cell)
 - if this is not the case, run the command
-  nbMerge/nbMerge path/to/conflict/file.nb
+  git mergetool --tool=nbMerge
 - choose the branch of your choice (by push of a button) for each conflict
   that appears in the notebook file.
 
