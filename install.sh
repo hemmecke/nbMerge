@@ -23,37 +23,97 @@
 #   along with nbMerge.  If not, see <http://www.gnu.org/licenses/>.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+# parse arguments
+
+USAGESTRING="./install.sh [path/to/repo] [path/to/nbMerge]"
+
+if [[ "X$1" = "X--help" ]]; then
+	echo "usage:"
+	echo "$USAGESTRING"
+	exit 1
+fi
+
+if [[ "X$#" != "X2" ]]; then
+	echo "usage:"
+	echo "$USAGESTRING"
+	exit 1
+fi
+
+REPODIR="$1"
+NBMERGEDIR="$2"
+
+# sanity check (params need to be directories)
+if [[ ! -d "$REPODIR" ]]; then
+	echo "Error: $REPODIR does not seem to be a directory."
+	exit 1
+fi
+if [[ ! -d "$NBMERGEDIR" ]]; then
+	echo "Error: $NBMERGEDIR does not seem to be a directory."
+	exit 1
+fi
+
+# save current working directory
+CWD=$(pwd)
+
+# change to repository directory to CHECK IF DIRECTORY IS GIT REPO
+cd "$REPODIR"
+
 # redirect error stream to /dev/null for next command
 exec 2> /dev/null
-
 TOPDIR=$(git rev-parse --show-toplevel)
-
 # redirect error stream to stdout
 exec 2>&1
 
 # check if in git repo
 if [[ "$TOPDIR" == "" ]]; then
-	echo "Error: You don't seem to be in a git repository."
+	echo "Error: $REPODIR doesn't seem to be a git repository."
 	echo "nbMerge can only be installed in a git repository."
 	exit 1
 fi
 
+# expand relative math NBMERGEDIR
+cd "$CWD"
+cd "$NBMERGEDIR"
+NBMERGEDIR=$(pwd)
+
+# cd back to where we were
+cd $CWD
+
 # check if necessary nbMerge files are present
-if [ ! -f "$TOPDIR"/nbMerge/pre-commit-hook-template.sh ];
+if [ ! -f "$NBMERGEDIR"/nbMerge/pre-commit-hook-template.sh ];
 then
+	echo DEBUG "$NBMERGEDIR"/nbMerge/pre-commit-hook-template.sh not found
     echo "Error: nbMerge files not found!"
     echo "Aborting ..."
     exit 2
 fi
-if [ ! -f "$TOPDIR"/nbMerge/normalize.py ];
+if [ ! -f "$NBMERGEDIR"/nbMerge/normalize.py ];
+then
+    echo "Error: nbMerge files not found!"
+    echo "Aborting ..."
+    exit 3
+fi
+if [ ! -f "$NBMERGEDIR"/nbMerge/nbMerge.py ];
 then
     echo "Error: nbMerge files not found!"
     echo "Aborting ..."
     exit 3
 fi
 
+# installing git nbMerge
+echo "installing mergetool nbMerge..."
+git config --global merge.tool nbMerge
+git config --global mergetool.nbMerge.cmd "$NBMERGEDIR/nbMerge/nbMerge.py "'$MERGED'
+git config --global mergetool.nbMerge.trustExitCode false
+
+# adding variable containing path of nbmerge directory to pre-commit hook
 echo "configuring and copying pre-commit hook ..."
-cp "$TOPDIR"/nbMerge/pre-commit-hook-template.sh "$TOPDIR"/.git/hooks/pre-commit
+touch "$TOPDIR"/.git/hooks/pre-commit
+echo "#!/bin/bash" > "$TOPDIR"/.git/hooks/pre-commit
+echo "" >> "$TOPDIR"/.git/hooks/pre-commit
+echo 'NBMERGEDIR='"$NBMERGEDIR" >> "$TOPDIR"/.git/hooks/pre-commit
+cat "$NBMERGEDIR"/nbMerge/pre-commit-hook-template.sh >> "$TOPDIR"/.git/hooks/pre-commit
+
 if [[ $? -ne 0 ]]; then
 	echo "An error occurred while configuring or copying the pre-commit hook."
 	echo "Please check file './.git/hooks/pre-commit' and remove it if necessary."
@@ -68,10 +128,5 @@ if [[ $? -ne 0 ]]; then
 	exit 5
 fi
 
-echo "customizing nbMerge_skeleton.py ..."
-touch "$TOPDIR"/nbMerge/nbMerge
-# echo '#!'$(which python) > "$TOPDIR"/nbMerge/nbMerge
-cat "$TOPDIR"/nbMerge/nbMerge_skeleton.py >> "$TOPDIR"/nbMerge/nbMerge
-chmod +x "$TOPDIR"/nbMerge/nbMerge
-
 echo "installation successful"
+exit 0
