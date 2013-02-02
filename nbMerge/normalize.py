@@ -188,6 +188,7 @@ if __name__ == "__main__" and len(sys.argv) == 2:
 		inp.close()
 
 		data = removeNLinExpr(data,'Cell[BoxData[')
+		data = removeNLinExpr(data,'Cell[TextData[')
 		data = removeMathematicaComments(data)
 		data = removeWhitespaces(data)
 		data = removeLineCarry(data)
