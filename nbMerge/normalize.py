@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #   nbMerge - git enabled for Mathematica (R)

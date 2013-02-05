@@ -43,8 +43,11 @@ REPODIR="$1"
 NBMERGEDIR="$2"
 
 # check if python is available
-if [[ ! -f "/usr/bin/python" ]]; then
-	echo "nbMerge needs to find python at \"/usr/bin/python\"."
+# Although /usr/bin/python is the standard location, python might be
+# installed in a different location or used via virtualenv.
+# Should we also check a proper version?
+if ! which python; then
+	echo "nbMerge requires python."
 	exit 1
 fi
 
